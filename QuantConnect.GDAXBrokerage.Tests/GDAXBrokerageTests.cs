@@ -162,11 +162,7 @@ namespace QuantConnect.Tests.Brokerages.GDAX
         {
             const decimal orderQuantity = 6.1m;
 
-            _unit.PlaceOrder(new MarketOrder(Symbols.BTCUSD, orderQuantity, DateTime.UtcNow)
-            {
-                // set the quote currency here to prevent the test from accessing algorithm.Securities
-                PriceCurrency = "USD"
-            });
+            _unit.PlaceOrder(new MarketOrder(Symbols.BTCUSD, orderQuantity, DateTime.UtcNow));
 
             _rest.Setup(m => m.Execute(It.Is<IRestRequest>(r => r.Resource == "/fills")))
                 .Returns(new RestResponse
@@ -268,7 +264,9 @@ namespace QuantConnect.Tests.Brokerages.GDAX
         {
             SetupResponse(_openOrderData);
 
-            _unit.CachedOrderIDs.TryAdd(1, new MarketOrder { BrokerId = new List<string> { "1" }, Price = 123 });
+            var marketOrder = new MarketOrder();
+            marketOrder.BrokerId.Add("1");
+            _unit.CachedOrderIDs.TryAdd(1, marketOrder);
 
             var actual = _unit.GetOpenOrders();
 
@@ -313,7 +311,9 @@ namespace QuantConnect.Tests.Brokerages.GDAX
         {
             SetupResponse(_holdingData);
 
-            _unit.CachedOrderIDs.TryAdd(1, new MarketOrder { BrokerId = new List<string> { "1" }, Price = 123 });
+            var marketOrder = new MarketOrder(_symbol, 0.01m, DateTime.UtcNow);
+            marketOrder.BrokerId.Add("1");
+            _unit.CachedOrderIDs.TryAdd(1, marketOrder);
 
             var actual = _unit.GetAccountHoldings();
 
@@ -336,8 +336,9 @@ namespace QuantConnect.Tests.Brokerages.GDAX
                     StatusCode = code2
                 });
 
-            var actual = _unit.CancelOrder(new LimitOrder { BrokerId = new List<string> { "1", "2" } });
-
+            var limitOrder = new LimitOrder();
+            limitOrder.BrokerId.AddRange(new List<string> { "1", "2" });
+            var actual = _unit.CancelOrder(limitOrder);
             Assert.AreEqual(expected, actual);
         }
 
