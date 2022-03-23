@@ -3,16 +3,16 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <TargetFramework>net5.0</TargetFramework>
-    <Product>QuantConnect.TemplateBrokerage</Product>
-    <AssemblyName>QuantConnect.GDAXBrokerage</AssemblyName>
-    <RootNamespace>QuantConnect.GDAXBrokerage</RootNamespace>
-    <AssemblyTitle>QuantConnect.GDAXBrokerage</AssemblyTitle>
+    <Product>QuantConnect.CoinbaseProBrokerage</Product>
+    <AssemblyName>QuantConnect.CoinbaseProBrokerage</AssemblyName>
+    <RootNamespace>QuantConnect.CoinbaseProBrokerage</RootNamespace>
+    <AssemblyTitle>QuantConnect.CoinbaseProBrokerage</AssemblyTitle>
     <OutputType>Library</OutputType>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Description>QuantConnect LEAN GDAX Brokerage: Brokerage Template plugin for Lean</Description>
+    <Description>QuantConnect LEAN CoinbasePro Brokerage: Brokerage Template plugin for Lean</Description>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
