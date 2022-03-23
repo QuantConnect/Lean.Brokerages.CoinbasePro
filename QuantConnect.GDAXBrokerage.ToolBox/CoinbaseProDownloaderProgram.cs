@@ -24,7 +24,7 @@ using QuantConnect.Configuration;
 
 namespace QuantConnect.ToolBox.GDAXDownloader
 {
-    public static class GDAXDownloaderProgram
+    public static class CoinbaseProDownloaderProgram
     {
         /// <summary>
         /// GDAX Downloader Toolbox Project For LEAN Algorithmic Trading Engine.
@@ -48,7 +48,7 @@ namespace QuantConnect.ToolBox.GDAXDownloader
                 //todo: will download any exchange but always save as gdax
                 // Create an instance of the downloader
                 const string market = Market.GDAX;
-                var downloader = new GDAXDownloader();
+                var downloader = new CoinbaseProDownloader();
                 foreach (var ticker in tickers)
                 {
                     // Download the data
@@ -79,7 +79,7 @@ namespace QuantConnect.ToolBox.GDAXDownloader
         /// </summary>
         public static void ExchangeInfoDownloader()
         {
-            new ExchangeInfoUpdater(new GDAXExchangeInfoDownloader())
+            new ExchangeInfoUpdater(new CoinbaseProExchangeInfoDownloader())
                 .Run();
         }
     }

@@ -27,20 +27,20 @@ namespace QuantConnect.Brokerages.GDAX
     /// <summary>
     /// An implementation of <see cref="IDataQueueHandler"/> for GDAX
     /// </summary>
-    [BrokerageFactory(typeof(GDAXBrokerageFactory))]
-    public class GDAXDataQueueHandler : GDAXBrokerage, IDataQueueHandler
+    [BrokerageFactory(typeof(CoinbaseProBrokerageFactory))]
+    public class CoinbaseProDataQueueHandler : CoinbaseProBrokerage, IDataQueueHandler
     {
         /// <summary>
         /// Constructor for brokerage
         /// </summary>
-        public GDAXDataQueueHandler() : base("GDAX")
+        public CoinbaseProDataQueueHandler() : base("GDAX")
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GDAXDataQueueHandler"/> class
+        /// Initializes a new instance of the <see cref="CoinbaseProDataQueueHandler"/> class
         /// </summary>
-        public GDAXDataQueueHandler(string wssUrl, IWebSocket websocket, IRestClient restClient, string apiKey, string apiSecret, string passPhrase, IAlgorithm algorithm,
+        public CoinbaseProDataQueueHandler(string wssUrl, IWebSocket websocket, IRestClient restClient, string apiKey, string apiSecret, string passPhrase, IAlgorithm algorithm,
             IPriceProvider priceProvider, IDataAggregator aggregator, LiveNodePacket job)
             : base(wssUrl, websocket, restClient, apiKey, apiSecret, passPhrase, algorithm, priceProvider, aggregator, job)
         {

@@ -31,7 +31,7 @@ using RestSharp;
 namespace QuantConnect.Tests.Brokerages.GDAX
 {
     [TestFixture, Explicit("This test requires a configured and testable GDAX account")]
-    public class GDAXBrokerageHistoryProviderTests
+    public class CoinbaseProBrokerageHistoryProviderTests
     {
         [Test, TestCaseSource(nameof(TestParameters))]
         public void GetsHistory(Symbol symbol, Resolution resolution, TickType tickType, TimeSpan period, bool shouldBeEmpty)
@@ -40,7 +40,7 @@ namespace QuantConnect.Tests.Brokerages.GDAX
             var webSocketClient = new WebSocketClientWrapper();
             var aggregator = new AggregationManager();
 
-            var brokerage = new GDAXBrokerage(
+            var brokerage = new CoinbaseProBrokerage(
                 Config.Get("gdax-url", "wss://ws-feed.pro.coinbase.com"), webSocketClient, restClient,
                 Config.Get("gdax-api-key"), Config.Get("gdax-api-secret"), Config.Get("gdax-passphrase"), null, null, aggregator, null);
 

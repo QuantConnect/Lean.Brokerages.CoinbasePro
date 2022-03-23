@@ -44,11 +44,11 @@ namespace QuantConnect.TemplateBrokerage.ToolBox
                 var toDate = optionsObject.ContainsKey("to-date")
                     ? Parse.DateTimeExact(optionsObject["to-date"].ToString(), "yyyyMMdd-HH:mm:ss")
                     : DateTime.UtcNow;
-                GDAXDownloaderProgram.GDAXDownloader(tickers, resolution, fromDate, toDate);
+                CoinbaseProDownloaderProgram.GDAXDownloader(tickers, resolution, fromDate, toDate);
             }
             else if (targetAppName.Contains("updater") || targetAppName.EndsWith("spu"))
             {
-                GDAXDownloaderProgram.ExchangeInfoDownloader();
+                CoinbaseProDownloaderProgram.ExchangeInfoDownloader();
             }
             else
             {

@@ -31,7 +31,7 @@ using QuantConnect.Util;
 
 namespace QuantConnect.Brokerages.GDAX
 {
-    public partial class GDAXBrokerage : BaseWebsocketsBrokerage
+    public partial class CoinbaseProBrokerage : BaseWebsocketsBrokerage
     {
         private const int MaxDataPointsPerHistoricalRequest = 300;
 
@@ -135,7 +135,7 @@ namespace QuantConnect.Brokerages.GDAX
                 }
 
                 // Add fill splits in all cases; we'll need to handle market fills too.
-                FillSplit.TryAdd(order.Id, new GDAXFill(order));
+                FillSplit.TryAdd(order.Id, new CoinbaseProFill(order));
 
                 // Generate submitted event
                 OnOrderEvent(new OrderEvent(order, DateTime.UtcNow, orderFee, "GDAX Order Event") { Status = OrderStatus.Submitted });

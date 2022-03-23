@@ -24,7 +24,7 @@ namespace QuantConnect.Brokerages.GDAX
     /// <summary>
     /// Utility methods for GDAX brokerage
     /// </summary>
-    public partial class GDAXBrokerage
+    public partial class CoinbaseProBrokerage
     {
         /// <summary>
         /// Sign Header

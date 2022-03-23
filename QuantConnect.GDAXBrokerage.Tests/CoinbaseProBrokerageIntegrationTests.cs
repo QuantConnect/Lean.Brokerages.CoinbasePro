@@ -29,7 +29,7 @@ using QuantConnect.Lean.Engine.DataFeeds;
 namespace QuantConnect.Tests.Brokerages.GDAX
 {
     [TestFixture, Explicit("This test requires a configured and active account")]
-    public class GDAXBrokerageIntegrationTests : BrokerageTests
+    public class CoinbaseProBrokerageIntegrationTests : BrokerageTests
     {
         #region Properties
         protected override Symbol Symbol => Symbol.Create("ETHBTC", SecurityType.Crypto, Market.GDAX);
@@ -68,7 +68,7 @@ namespace QuantConnect.Tests.Brokerages.GDAX
             priceProvider.Setup(a => a.GetLastPrice(It.IsAny<Symbol>())).Returns(1.234m);
 
             var aggregator = new AggregationManager();
-            return new GDAXBrokerage(Config.Get("gdax-url", "wss://ws-feed.pro.coinbase.com"), webSocketClient, restClient,
+            return new CoinbaseProBrokerage(Config.Get("gdax-url", "wss://ws-feed.pro.coinbase.com"), webSocketClient, restClient,
                 Config.Get("gdax-api-key"), Config.Get("gdax-api-secret"), Config.Get("gdax-passphrase"), algorithm.Object,
                 priceProvider.Object, aggregator, null);
         }
@@ -83,7 +83,7 @@ namespace QuantConnect.Tests.Brokerages.GDAX
 
         protected override decimal GetAskPrice(Symbol symbol)
         {
-            var tick = ((GDAXBrokerage)Brokerage).GetTick(symbol);
+            var tick = ((CoinbaseProBrokerage)Brokerage).GetTick(symbol);
             return tick.AskPrice;
         }
 

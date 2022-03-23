@@ -36,14 +36,14 @@ using System.Threading.Tasks;
 
 namespace QuantConnect.Brokerages.GDAX
 {
-    public partial class GDAXBrokerage
+    public partial class CoinbaseProBrokerage
     {
         #region Declarations
 
         /// <summary>
         /// Collection of partial split messages
         /// </summary>
-        public ConcurrentDictionary<long, GDAXFill> FillSplit { get; set; }
+        public ConcurrentDictionary<long, CoinbaseProFill> FillSplit { get; set; }
 
         private string _passPhrase;
         private IAlgorithm _algorithm;
@@ -84,7 +84,7 @@ namespace QuantConnect.Brokerages.GDAX
         /// Constructor for brokerage
         /// </summary>
         /// <param name="name">Name of brokerage</param>
-        public GDAXBrokerage(string name) : base(name)
+        public CoinbaseProBrokerage(string name) : base(name)
         {
         }
 
@@ -101,7 +101,7 @@ namespace QuantConnect.Brokerages.GDAX
         /// <param name="priceProvider">The price provider for missing FX conversion rates</param>
         /// <param name="aggregator">consolidate ticks</param>
         /// <param name="job">The live job packet</param>
-        public GDAXBrokerage(string wssUrl, IWebSocket websocket, IRestClient restClient, string apiKey, string apiSecret, string passPhrase, IAlgorithm algorithm,
+        public CoinbaseProBrokerage(string wssUrl, IWebSocket websocket, IRestClient restClient, string apiKey, string apiSecret, string passPhrase, IAlgorithm algorithm,
             IPriceProvider priceProvider, IDataAggregator aggregator, LiveNodePacket job)
             : base("GDAX")
         {
@@ -201,13 +201,13 @@ namespace QuantConnect.Brokerages.GDAX
             }
             base.Initialize(wssUrl, websocket, restClient, apiKey, apiSecret);
             _job = job;
-            FillSplit = new ConcurrentDictionary<long, GDAXFill>();
+            FillSplit = new ConcurrentDictionary<long, CoinbaseProFill>();
             _passPhrase = passPhrase;
             _algorithm = algorithm;
             _priceProvider = priceProvider;
             _aggregator = aggregator;
 
-            _isDataQueueHandler = this is GDAXDataQueueHandler;
+            _isDataQueueHandler = this is CoinbaseProDataQueueHandler;
 
             _fillMonitorTask = Task.Factory.StartNew(FillMonitorAction, _ctsFillMonitor.Token);
 
@@ -341,7 +341,7 @@ namespace QuantConnect.Brokerages.GDAX
 
             if (!FillSplit.ContainsKey(order.Id))
             {
-                FillSplit[order.Id] = new GDAXFill(order);
+                FillSplit[order.Id] = new CoinbaseProFill(order);
             }
 
             var split = FillSplit[order.Id];

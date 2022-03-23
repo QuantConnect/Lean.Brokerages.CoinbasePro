@@ -22,7 +22,7 @@ namespace QuantConnect.Brokerages.GDAX
     /// <summary>
     /// Tracks fill messages
     /// </summary>
-    public class GDAXFill
+    public class CoinbaseProFill
     {
         private readonly List<Fill> _messages = new List<Fill>();
 
@@ -51,7 +51,7 @@ namespace QuantConnect.Brokerages.GDAX
         /// Creates instance of GDAXFill
         /// </summary>
         /// <param name="order"></param>
-        public GDAXFill(Orders.Order order)
+        public CoinbaseProFill(Orders.Order order)
         {
             Order = order;
         }

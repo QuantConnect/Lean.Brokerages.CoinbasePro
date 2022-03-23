@@ -31,7 +31,7 @@ using RestSharp;
 namespace QuantConnect.Tests.Brokerages.GDAX
 {
     [TestFixture, Explicit("These tests requires a configured and active GDAX account.")]
-    public class GDAXBrokerageAdditionalTests
+    public class CoinbaseProBrokerageAdditionalTests
     {
         [Test]
         public void PublicEndpointCallsAreRateLimited()
@@ -160,7 +160,7 @@ namespace QuantConnect.Tests.Brokerages.GDAX
             return new TestGDAXDataQueueHandler(wssUrl, webSocketClient, restClient, apiKey, apiSecret, passPhrase, algorithm, priceProvider, aggregator, null);
         }
 
-        private class TestGDAXDataQueueHandler : GDAXDataQueueHandler
+        private class TestGDAXDataQueueHandler : CoinbaseProDataQueueHandler
         {
             public TestGDAXDataQueueHandler(string wssUrl, IWebSocket websocket, IRestClient restClient, string apiKey,
                 string apiSecret,

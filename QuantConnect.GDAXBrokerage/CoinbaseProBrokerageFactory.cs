@@ -27,12 +27,12 @@ namespace QuantConnect.Brokerages.GDAX
     /// <summary>
     /// Factory method to create GDAX Websockets brokerage
     /// </summary>
-    public class GDAXBrokerageFactory : BrokerageFactory
+    public class CoinbaseProBrokerageFactory : BrokerageFactory
     {
         /// <summary>
         /// Factory constructor
         /// </summary>
-        public GDAXBrokerageFactory() : base(typeof(GDAXBrokerage))
+        public CoinbaseProBrokerageFactory() : base(typeof(CoinbaseProBrokerage))
         {
         }
 
@@ -96,7 +96,7 @@ namespace QuantConnect.Brokerages.GDAX
             IBrokerage brokerage;
             if (job.DataQueueHandler.Contains("GDAXDataQueueHandler"))
             {
-                var dataQueueHandler = new GDAXDataQueueHandler(job.BrokerageData["gdax-url"], webSocketClient,
+                var dataQueueHandler = new CoinbaseProDataQueueHandler(job.BrokerageData["gdax-url"], webSocketClient,
                     restClient, job.BrokerageData["gdax-api-key"], job.BrokerageData["gdax-api-secret"],
                     job.BrokerageData["gdax-passphrase"], algorithm, priceProvider, aggregator, job);
 
@@ -106,7 +106,7 @@ namespace QuantConnect.Brokerages.GDAX
             }
             else
             {
-                brokerage = new GDAXBrokerage(job.BrokerageData["gdax-url"], webSocketClient,
+                brokerage = new CoinbaseProBrokerage(job.BrokerageData["gdax-url"], webSocketClient,
                     restClient, job.BrokerageData["gdax-api-key"], job.BrokerageData["gdax-api-secret"],
                     job.BrokerageData["gdax-passphrase"], algorithm, priceProvider, aggregator, job);
             }

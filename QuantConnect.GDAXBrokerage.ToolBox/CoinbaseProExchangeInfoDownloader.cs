@@ -26,7 +26,7 @@ namespace QuantConnect.ToolBox.GDAXDownloader
     /// <summary>
     /// GDAX implementation of <see cref="IExchangeInfoDownloader"/>
     /// </summary>
-    public class GDAXExchangeInfoDownloader : IExchangeInfoDownloader
+    public class CoinbaseProExchangeInfoDownloader : IExchangeInfoDownloader
     {
         private readonly Dictionary<string, string> _idNameMapping = new();
 
@@ -38,7 +38,7 @@ namespace QuantConnect.ToolBox.GDAXDownloader
         /// <summary>
         /// Creats an instance of the class
         /// </summary>
-        public GDAXExchangeInfoDownloader()
+        public CoinbaseProExchangeInfoDownloader()
         {
             _idNameMapping = GetCurrencyDetails();
         }

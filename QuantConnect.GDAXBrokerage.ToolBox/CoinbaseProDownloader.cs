@@ -31,7 +31,7 @@ namespace QuantConnect.ToolBox.GDAXDownloader
     /// <summary>
     /// GDAX Data Downloader class
     /// </summary>
-    public class GDAXDownloader : IDataDownloader
+    public class CoinbaseProDownloader : IDataDownloader
     {
         const int MaxDatapointsPerRequest = 200;
         const int MaxRequestsPerSecond = 2;

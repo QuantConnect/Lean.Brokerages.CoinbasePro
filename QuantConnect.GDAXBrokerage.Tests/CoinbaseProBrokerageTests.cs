@@ -36,7 +36,7 @@ using QuantConnect.Lean.Engine.DataFeeds;
 namespace QuantConnect.Tests.Brokerages.GDAX
 {
     [TestFixture, Parallelizable(ParallelScope.Fixtures)]
-    public class GDAXBrokerageTests
+    public class CoinbaseProBrokerageTests
     {
         #region Declarations
 
@@ -406,7 +406,7 @@ namespace QuantConnect.Tests.Brokerages.GDAX
                 false);
         }
 
-        private class GDAXFakeDataQueueHandler : GDAXDataQueueHandler
+        private class GDAXFakeDataQueueHandler : CoinbaseProDataQueueHandler
         {
             protected override string[] ChannelNames => new[] { "heartbeat", "user" };
 
