@@ -79,7 +79,7 @@ namespace QuantConnect.Brokerages.CoinbasePro
                 payload.overdraft_enabled = true;
             }
 
-            var orderProperties = order.Properties as GDAXOrderProperties;
+            var orderProperties = order.Properties as CoinbaseProOrderProperties;
             if (orderProperties != null)
             {
                 if (order.Type == OrderType.Limit)
