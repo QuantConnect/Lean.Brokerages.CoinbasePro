@@ -94,7 +94,7 @@ namespace QuantConnect.Brokerages.CoinbasePro
             var aggregator = Composer.Instance.GetExportedValueByTypeName<IDataAggregator>(Config.Get("data-aggregator", "QuantConnect.Lean.Engine.DataFeeds.AggregationManager"), forceTypeNameOnExisting: false);
 
             IBrokerage brokerage;
-            if (job.DataQueueHandler.Contains("GDAXDataQueueHandler"))
+            if (job.DataQueueHandler.Contains("CoinbaseProDataQueueHandler"))
             {
                 var dataQueueHandler = new CoinbaseProDataQueueHandler(job.BrokerageData["gdax-url"], webSocketClient,
                     restClient, job.BrokerageData["gdax-api-key"], job.BrokerageData["gdax-api-secret"],
