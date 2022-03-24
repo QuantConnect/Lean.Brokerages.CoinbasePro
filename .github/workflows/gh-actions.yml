@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
         continue-on-error: true
         with:
-          ref: refactor-extract-gdax-brokerage
+          ref: feature-change-gdax-to-coinbasepro
           repository: rjra2611/Lean
           path: Lean
 
@@ -35,7 +35,7 @@ jobs:
         run: mv Lean ../Lean
 
       - name: Build
-        run: dotnet build /p:Configuration=Release /v:quiet /p:WarningLevel=1 QuantConnect.GDAXBrokerage.sln
+        run: dotnet build /p:Configuration=Release /v:quiet /p:WarningLevel=1 QuantConnect.CoinbaseProBrokerage.sln
 
       - name: Run Tests
-        run: dotnet test ./QuantConnect.GDAXBrokerage.Tests/bin/Release/QuantConnect.GDAXBrokerage.Tests.dll
+        run: dotnet test ./QuantConnect.CoinbaseProBrokerage.Tests/bin/Release/QuantConnect.CoinbaseProBrokerage.Tests.dll
