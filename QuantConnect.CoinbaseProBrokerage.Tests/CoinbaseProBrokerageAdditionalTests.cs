@@ -19,7 +19,7 @@ using System.Threading;
 using NUnit.Framework;
 using QuantConnect.Algorithm;
 using QuantConnect.Brokerages;
-using QuantConnect.Brokerages.GDAX;
+using QuantConnect.Brokerages.CoinbasePro;
 using QuantConnect.Configuration;
 using QuantConnect.Data;
 using QuantConnect.Interfaces;
@@ -28,7 +28,7 @@ using QuantConnect.Logging;
 using QuantConnect.Packets;
 using RestSharp;
 
-namespace QuantConnect.Tests.Brokerages.GDAX
+namespace QuantConnect.Tests.Brokerages.CoinbasePro
 {
     [TestFixture, Explicit("These tests requires a configured and active GDAX account.")]
     public class CoinbaseProBrokerageAdditionalTests

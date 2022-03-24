@@ -22,7 +22,7 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 
-namespace QuantConnect.Brokerages.GDAX
+namespace QuantConnect.Brokerages.CoinbasePro
 {
     /// <summary>
     /// An implementation of <see cref="IDataQueueHandler"/> for GDAX

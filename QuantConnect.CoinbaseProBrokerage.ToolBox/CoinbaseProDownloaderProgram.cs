@@ -22,7 +22,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using QuantConnect.Configuration;
 
-namespace QuantConnect.ToolBox.GDAXDownloader
+namespace QuantConnect.ToolBox.CoinbasePro
 {
     public static class CoinbaseProDownloaderProgram
     {

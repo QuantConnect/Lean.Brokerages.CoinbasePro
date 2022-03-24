@@ -14,7 +14,7 @@
 */
 
 using System;
-using QuantConnect.Brokerages.GDAX;
+using QuantConnect.Brokerages.CoinbasePro;
 using NUnit.Framework;
 using QuantConnect.Interfaces;
 using QuantConnect.Securities;
@@ -26,7 +26,7 @@ using QuantConnect.Tests.Common.Securities;
 using RestSharp;
 using QuantConnect.Lean.Engine.DataFeeds;
 
-namespace QuantConnect.Tests.Brokerages.GDAX
+namespace QuantConnect.Tests.Brokerages.CoinbasePro
 {
     [TestFixture, Explicit("This test requires a configured and active account")]
     public class CoinbaseProBrokerageIntegrationTests : BrokerageTests

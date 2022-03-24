@@ -22,7 +22,7 @@ using QuantConnect.Securities;
 using QuantConnect.Util;
 using RestSharp;
 
-namespace QuantConnect.Brokerages.GDAX
+namespace QuantConnect.Brokerages.CoinbasePro
 {
     /// <summary>
     /// Factory method to create GDAX Websockets brokerage

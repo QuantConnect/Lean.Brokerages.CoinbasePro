@@ -26,7 +26,7 @@ using QuantConnect.Data;
 using QuantConnect.Data.Market;
 using QuantConnect.Logging;
 
-namespace QuantConnect.ToolBox.GDAXDownloader
+namespace QuantConnect.ToolBox.CoinbasePro
 {
     /// <summary>
     /// GDAX Data Downloader class

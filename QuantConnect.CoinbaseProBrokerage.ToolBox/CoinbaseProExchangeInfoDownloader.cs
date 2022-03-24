@@ -16,12 +16,12 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using QuantConnect.Logging;
-using QuantConnect.ToolBox.GDAXDownloader.Models;
+using QuantConnect.ToolBox.CoinbasePro.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace QuantConnect.ToolBox.GDAXDownloader
+namespace QuantConnect.ToolBox.CoinbasePro
 {
     /// <summary>
     /// GDAX implementation of <see cref="IExchangeInfoDownloader"/>

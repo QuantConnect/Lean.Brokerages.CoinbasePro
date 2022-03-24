@@ -17,7 +17,7 @@ using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using QuantConnect.Brokerages;
-using QuantConnect.Brokerages.GDAX;
+using QuantConnect.Brokerages.CoinbasePro;
 using QuantConnect.Interfaces;
 using QuantConnect.Orders;
 using RestSharp;
@@ -33,7 +33,7 @@ using QuantConnect.Data;
 using QuantConnect.Data.Market;
 using QuantConnect.Lean.Engine.DataFeeds;
 
-namespace QuantConnect.Tests.Brokerages.GDAX
+namespace QuantConnect.Tests.Brokerages.CoinbasePro
 {
     [TestFixture, Parallelizable(ParallelScope.Fixtures)]
     public class CoinbaseProBrokerageTests

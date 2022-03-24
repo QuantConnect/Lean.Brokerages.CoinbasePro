@@ -17,7 +17,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace QuantConnect.Brokerages.GDAX.Messages
+namespace QuantConnect.Brokerages.CoinbasePro.Messages
 {
 
     //several simple objects to facilitate json conversion

@@ -18,7 +18,7 @@ using System.Linq;
 using NodaTime;
 using NUnit.Framework;
 using QuantConnect.Brokerages;
-using QuantConnect.Brokerages.GDAX;
+using QuantConnect.Brokerages.CoinbasePro;
 using QuantConnect.Configuration;
 using QuantConnect.Data;
 using QuantConnect.Data.Market;
@@ -28,7 +28,7 @@ using QuantConnect.Logging;
 using QuantConnect.Securities;
 using RestSharp;
 
-namespace QuantConnect.Tests.Brokerages.GDAX
+namespace QuantConnect.Tests.Brokerages.CoinbasePro
 {
     [TestFixture, Explicit("This test requires a configured and testable GDAX account")]
     public class CoinbaseProBrokerageHistoryProviderTests

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-namespace QuantConnect.Brokerages.GDAX
+namespace QuantConnect.Brokerages.CoinbasePro
 {
     /// <summary>
     /// Contains data used for authentication

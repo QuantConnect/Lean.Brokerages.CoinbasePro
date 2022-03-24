@@ -29,7 +29,7 @@ using QuantConnect.Logging;
 using QuantConnect.Orders.Fees;
 using QuantConnect.Util;
 
-namespace QuantConnect.Brokerages.GDAX
+namespace QuantConnect.Brokerages.CoinbasePro
 {
     public partial class CoinbaseProBrokerage : BaseWebsocketsBrokerage
     {

@@ -34,7 +34,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace QuantConnect.Brokerages.GDAX
+namespace QuantConnect.Brokerages.CoinbasePro
 {
     public partial class CoinbaseProBrokerage
     {

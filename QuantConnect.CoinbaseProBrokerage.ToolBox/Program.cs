@@ -14,11 +14,10 @@
 */
 
 using QuantConnect.Configuration;
-using QuantConnect.ToolBox.GDAXDownloader;
 using System;
 using static QuantConnect.Configuration.ApplicationParser;
 
-namespace QuantConnect.TemplateBrokerage.ToolBox
+namespace QuantConnect.ToolBox.CoinbasePro
 {
     internal static class Program
     {
