@@ -64,7 +64,7 @@ namespace QuantConnect.Brokerages.CoinbasePro
         /// The brokerage model
         /// </summary>
         /// <param name="orderProvider">The order provider</param>
-        public override IBrokerageModel GetBrokerageModel(IOrderProvider orderProvider) => new GDAXBrokerageModel();
+        public override IBrokerageModel GetBrokerageModel(IOrderProvider orderProvider) => new CoinbaseProBrokerageModel();
 
         /// <summary>
         /// Create the Brokerage instance

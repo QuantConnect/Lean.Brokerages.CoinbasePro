@@ -60,7 +60,7 @@ namespace QuantConnect.Tests.Brokerages.CoinbasePro
 
             var algorithm = new Mock<IAlgorithm>();
             algorithm.Setup(a => a.Transactions).Returns(transactions);
-            algorithm.Setup(a => a.BrokerageModel).Returns(new GDAXBrokerageModel());
+            algorithm.Setup(a => a.BrokerageModel).Returns(new CoinbaseProBrokerageModel());
             algorithm.Setup(a => a.Portfolio).Returns(new SecurityPortfolioManager(securities, transactions));
             algorithm.Setup(a => a.Securities).Returns(securities);
 
