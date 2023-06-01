@@ -45,7 +45,6 @@ namespace QuantConnect.Brokerages.GDAX
         /// </summary>
         public ConcurrentDictionary<long, GDAXFill> FillSplit { get; set; }
 
-        private string _passPhrase;
         private IAlgorithm _algorithm;
         private readonly CancellationTokenSource _canceller = new CancellationTokenSource();
         private readonly ConcurrentDictionary<Symbol, DefaultOrderBook> _orderBooks = new ConcurrentDictionary<Symbol, DefaultOrderBook>();
@@ -97,12 +96,11 @@ namespace QuantConnect.Brokerages.GDAX
         /// <param name="restClient">instance of rest client</param>
         /// <param name="apiKey">api key</param>
         /// <param name="apiSecret">api secret</param>
-        /// <param name="passPhrase">pass phrase</param>
         /// <param name="algorithm">the algorithm instance is required to retreive account type</param>
         /// <param name="priceProvider">The price provider for missing FX conversion rates</param>
         /// <param name="aggregator">consolidate ticks</param>
         /// <param name="job">The live job packet</param>
-        public GDAXBrokerage(string wssUrl, IWebSocket websocket, IRestClient restClient, string apiKey, string apiSecret, string passPhrase, IAlgorithm algorithm,
+        public GDAXBrokerage(string wssUrl, IWebSocket websocket, IRestClient restClient, string apiKey, string apiSecret, IAlgorithm algorithm,
             IPriceProvider priceProvider, IDataAggregator aggregator, LiveNodePacket job)
             : base("GDAX")
         {
@@ -112,7 +110,6 @@ namespace QuantConnect.Brokerages.GDAX
                 restClient: restClient,
                 apiKey: apiKey,
                 apiSecret: apiSecret,
-                passPhrase: passPhrase,
                 algorithm: algorithm,
                 priceProvider: priceProvider,
                 aggregator: aggregator,
@@ -188,13 +185,12 @@ namespace QuantConnect.Brokerages.GDAX
         /// <param name="restClient">instance of rest client</param>
         /// <param name="apiKey">api key</param>
         /// <param name="apiSecret">api secret</param>
-        /// <param name="passPhrase">pass phrase</param>
         /// <param name="algorithm">the algorithm instance is required to retrieve account type</param>
         /// <param name="priceProvider">The price provider for missing FX conversion rates</param>
         /// <param name="aggregator">the aggregator for consolidating ticks</param>
         /// <param name="job">The live job packet</param>
         protected void Initialize(string wssUrl, IWebSocket websocket, IRestClient restClient, string apiKey, string apiSecret,
-            string passPhrase, IAlgorithm algorithm, IPriceProvider priceProvider, IDataAggregator aggregator, LiveNodePacket job)
+            IAlgorithm algorithm, IPriceProvider priceProvider, IDataAggregator aggregator, LiveNodePacket job)
         {
             if (IsInitialized)
             {
@@ -203,7 +199,6 @@ namespace QuantConnect.Brokerages.GDAX
             base.Initialize(wssUrl, websocket, restClient, apiKey, apiSecret);
             _job = job;
             FillSplit = new ConcurrentDictionary<long, GDAXFill>();
-            _passPhrase = passPhrase;
             _algorithm = algorithm;
             _priceProvider = priceProvider;
             _aggregator = aggregator;
@@ -497,12 +492,11 @@ namespace QuantConnect.Brokerages.GDAX
 
             var json = JsonConvert.SerializeObject(new
             {
-                type = payload.type,
-                channels = payload.channels,
-                product_ids = payload.product_ids,
+                payload.type,
+                payload.channels,
+                payload.product_ids,
                 timestamp = token.Timestamp,
                 key = ApiKey,
-                passphrase = _passPhrase,
                 signature = token.Signature,
             });
 

@@ -48,13 +48,12 @@ namespace QuantConnect.Brokerages.GDAX
         /// </summary>
         public override Dictionary<string, string> BrokerageData => new Dictionary<string, string>
         {
-            // Sandbox environment for paper trading available using 'wss://ws-feed-public.sandbox.pro.coinbase.com'
-            { "gdax-url" , Config.Get("gdax-url", "wss://ws-feed.pro.coinbase.com")},
-            // Sandbox environment for paper trading available using 'https://api-public.sandbox.pro.coinbase.com'
-            { "gdax-rest-api", Config.Get("gdax-rest-api", "https://api.pro.coinbase.com")},
+            // Sandbox environment for paper trading available using 'wss://ws-feed-public.sandbox.exchange.coinbase.com'
+            { "gdax-url" , Config.Get("gdax-url", "wss://advanced-trade-ws.coinbase.com")},
+            // Sandbox environment for paper trading available using 'https://api-public.sandbox.exchange.coinbase.com'
+            { "gdax-rest-api", Config.Get("gdax-rest-api", "https://api.coinbase.com")},
             { "gdax-api-secret", Config.Get("gdax-api-secret")},
             { "gdax-api-key", Config.Get("gdax-api-key")},
-            { "gdax-passphrase", Config.Get("gdax-passphrase")},
 
             // load holdings if available
             { "live-holdings", Config.Get("live-holdings")},
@@ -74,7 +73,7 @@ namespace QuantConnect.Brokerages.GDAX
         /// <returns></returns>
         public override IBrokerage CreateBrokerage(Packets.LiveNodePacket job, IAlgorithm algorithm)
         {
-            var required = new[] { "gdax-url", "gdax-api-secret", "gdax-api-key", "gdax-passphrase" };
+            var required = new[] { "gdax-url", "gdax-api-secret", "gdax-api-key" };
 
             foreach (var item in required)
             {
@@ -98,7 +97,7 @@ namespace QuantConnect.Brokerages.GDAX
             {
                 var dataQueueHandler = new GDAXDataQueueHandler(job.BrokerageData["gdax-url"], webSocketClient,
                     restClient, job.BrokerageData["gdax-api-key"], job.BrokerageData["gdax-api-secret"],
-                    job.BrokerageData["gdax-passphrase"], algorithm, priceProvider, aggregator, job);
+                    algorithm, priceProvider, aggregator, job);
 
                 Composer.Instance.AddPart<IDataQueueHandler>(dataQueueHandler);
 
@@ -108,7 +107,7 @@ namespace QuantConnect.Brokerages.GDAX
             {
                 brokerage = new GDAXBrokerage(job.BrokerageData["gdax-url"], webSocketClient,
                     restClient, job.BrokerageData["gdax-api-key"], job.BrokerageData["gdax-api-secret"],
-                    job.BrokerageData["gdax-passphrase"], algorithm, priceProvider, aggregator, job);
+                    algorithm, priceProvider, aggregator, job);
             }
 
             return brokerage;

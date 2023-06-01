@@ -63,27 +63,10 @@ namespace QuantConnect.Brokerages.GDAX.Messages
         public string ProfileId { get; set; }
     }
 
-    public class Heartbeat : BaseMessage
-    {
-        [JsonProperty("last_trade_id")]
-        public int LastTradeId { get; set; }
-    }
-
     public class Error : BaseMessage
     {
         public string Message { get; set; }
         public string Reason { get; set; }
-    }
-
-    public class Subscribe
-    {
-        public string Type { get; set; }
-        [JsonProperty("product_ids")]
-        public IList<string> ProductIds { get; set; }
-        public string Signature { get; set; }
-        public string Key { get; set; }
-        public string Passphrase { get; set; }
-        public string Timestamp { get; set; }
     }
 
     public class Open : BaseMessage
@@ -173,6 +156,11 @@ namespace QuantConnect.Brokerages.GDAX.Messages
 
         [JsonProperty("usd_volume")]
         public decimal UsdVolume { get; set; }
+    }
+
+    public class AccountsResponse
+    {
+        public Account[] Accounts { get; set; }
     }
 
     public class Account

@@ -97,7 +97,7 @@ namespace QuantConnect.Tests.Brokerages.GDAX
                     StatusCode = HttpStatusCode.OK
                 });
 
-            _unit = new GDAXFakeDataQueueHandler("wss://localhost", _wss.Object, _rest.Object, "abc", "MTIz", "pass", _algo.Object, priceProvider.Object, new AggregationManager());
+            _unit = new GDAXFakeDataQueueHandler("wss://localhost", _wss.Object, _rest.Object, "abc", "MTIz", _algo.Object, priceProvider.Object, new AggregationManager());
 
             _fillData = File.ReadAllText("TestData//gdax_fill.txt");
             _openOrderData = File.ReadAllText("TestData//gdax_openOrders.txt");
@@ -208,7 +208,6 @@ namespace QuantConnect.Tests.Brokerages.GDAX
 
             Assert.IsFalse(string.IsNullOrEmpty(actual.Signature));
             Assert.IsFalse(string.IsNullOrEmpty(actual.Timestamp));
-            Assert.AreEqual("pass", actual.Passphrase);
             Assert.AreEqual("abc", actual.Key);
         }
 
@@ -411,9 +410,9 @@ namespace QuantConnect.Tests.Brokerages.GDAX
         {
             protected override string[] ChannelNames => new[] { "heartbeat", "user" };
 
-            public GDAXFakeDataQueueHandler(string wssUrl, IWebSocket websocket, IRestClient restClient, string apiKey, string apiSecret, string passPhrase, IAlgorithm algorithm,
+            public GDAXFakeDataQueueHandler(string wssUrl, IWebSocket websocket, IRestClient restClient, string apiKey, string apiSecret, IAlgorithm algorithm,
                 IPriceProvider priceProvider, IDataAggregator aggregator)
-            : base(wssUrl, websocket, restClient, apiKey, apiSecret, passPhrase, algorithm, priceProvider, aggregator, null)
+            : base(wssUrl, websocket, restClient, apiKey, apiSecret, algorithm, priceProvider, aggregator, null)
             {
             }
 

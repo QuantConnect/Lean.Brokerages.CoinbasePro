@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 namespace QuantConnect.Brokerages.GDAX
 {
     /// <summary>
@@ -31,9 +32,5 @@ namespace QuantConnect.Brokerages.GDAX
         /// The timestamp
         /// </summary>
         public string Timestamp { get; set; }
-        /// <summary>
-        /// The pass phrase
-        /// </summary>
-        public string Passphrase { get; set; }
     }
 }

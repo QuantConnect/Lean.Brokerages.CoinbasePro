@@ -42,7 +42,7 @@ namespace QuantConnect.Tests.Brokerages.GDAX
 
             var brokerage = new GDAXBrokerage(
                 Config.Get("gdax-url", "wss://ws-feed.pro.coinbase.com"), webSocketClient, restClient,
-                Config.Get("gdax-api-key"), Config.Get("gdax-api-secret"), Config.Get("gdax-passphrase"), null, null, aggregator, null);
+                Config.Get("gdax-api-key"), Config.Get("gdax-api-secret"), null, null, aggregator, null);
 
             var historyProvider = new BrokerageHistoryProvider();
             historyProvider.SetBrokerage(brokerage);

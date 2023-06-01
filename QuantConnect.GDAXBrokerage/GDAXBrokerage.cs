@@ -231,7 +231,7 @@ namespace QuantConnect.Brokerages.GDAX
         {
             var list = new List<Order>();
 
-            var req = new RestRequest("/orders?status=open&status=pending&status=active", Method.GET);
+            var req = new RestRequest("/api/v3/brokerage/orders/historical/batch?order_status=OPEN&order_status=pending", Method.GET);
             GetAuthenticationToken(req);
             var response = ExecuteRestRequest(req, GdaxEndpointType.Private);
 
@@ -470,7 +470,7 @@ namespace QuantConnect.Brokerages.GDAX
         /// </summary>
         private string GetAccountBaseCurrency()
         {
-            var req = new RestRequest("/accounts", Method.GET);
+            var req = new RestRequest("/api/v3/brokerage/accounts", Method.GET);
             GetAuthenticationToken(req);
             var response = ExecuteRestRequest(req, GdaxEndpointType.Private);
 
@@ -479,7 +479,7 @@ namespace QuantConnect.Brokerages.GDAX
                 throw new Exception($"GDAXBrokerage.GetAccountBaseCurrency(): request failed: [{(int)response.StatusCode}] {response.StatusDescription}, Content: {response.Content}, ErrorMessage: {response.ErrorMessage}");
             }
 
-            var result = JsonConvert.DeserializeObject<Messages.Account[]>(response.Content)
+            var result = JsonConvert.DeserializeObject<Messages.AccountsResponse>(response.Content).Accounts
                 .Where(account => FiatCurrencies.Contains(account.Currency))
                 // we choose the first fiat currency which has the largest available quantity
                 .OrderByDescending(account => account.Available).ThenBy(account => account.Currency)

@@ -61,7 +61,7 @@ namespace QuantConnect.Tests.Brokerages.GDAX
             var algorithm = new Mock<IAlgorithm>();
             algorithm.Setup(a => a.Transactions).Returns(transactions);
             algorithm.Setup(a => a.BrokerageModel).Returns(new GDAXBrokerageModel());
-            algorithm.Setup(a => a.Portfolio).Returns(new SecurityPortfolioManager(securities, transactions));
+            algorithm.Setup(a => a.Portfolio).Returns(new SecurityPortfolioManager(securities, transactions, new AlgorithmSettings()));
             algorithm.Setup(a => a.Securities).Returns(securities);
 
             var priceProvider = new Mock<IPriceProvider>();
@@ -69,7 +69,7 @@ namespace QuantConnect.Tests.Brokerages.GDAX
 
             var aggregator = new AggregationManager();
             return new GDAXBrokerage(Config.Get("gdax-url", "wss://ws-feed.pro.coinbase.com"), webSocketClient, restClient,
-                Config.Get("gdax-api-key"), Config.Get("gdax-api-secret"), Config.Get("gdax-passphrase"), algorithm.Object,
+                Config.Get("gdax-api-key"), Config.Get("gdax-api-secret"), algorithm.Object,
                 priceProvider.Object, aggregator, null);
         }
 

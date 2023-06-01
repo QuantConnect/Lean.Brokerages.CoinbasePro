@@ -133,14 +133,13 @@ namespace QuantConnect.Tests.Brokerages.GDAX
             var restClient = new RestClient(Config.Get("gdax-rest-api", "https://api.pro.coinbase.com"));
             var apiKey = Config.Get("gdax-api-key");
             var apiSecret = Config.Get("gdax-api-secret");
-            var passPhrase = Config.Get("gdax-passphrase");
             var algorithm = new QCAlgorithm();
             var userId = Config.GetInt("job-user-id");
             var userToken = Config.Get("api-access-token");
             var priceProvider = new ApiPriceProvider(userId, userToken);
             var aggregator = new AggregationManager();
 
-            return new TestGDAXDataQueueHandler(wssUrl, webSocketClient, restClient, apiKey, apiSecret, passPhrase, algorithm, priceProvider, aggregator, null);
+            return new TestGDAXDataQueueHandler(wssUrl, webSocketClient, restClient, apiKey, apiSecret, algorithm, priceProvider, aggregator, null);
         }
 
         private static TestGDAXDataQueueHandler GetBrokerage()
@@ -150,27 +149,25 @@ namespace QuantConnect.Tests.Brokerages.GDAX
             var restClient = new RestClient(Config.Get("gdax-rest-api", "https://api.pro.coinbase.com"));
             var apiKey = Config.Get("gdax-api-key");
             var apiSecret = Config.Get("gdax-api-secret");
-            var passPhrase = Config.Get("gdax-passphrase");
             var algorithm = new QCAlgorithm();
             var userId = Config.GetInt("job-user-id");
             var userToken = Config.Get("api-access-token");
             var priceProvider = new ApiPriceProvider(userId, userToken);
             var aggregator = new AggregationManager();
 
-            return new TestGDAXDataQueueHandler(wssUrl, webSocketClient, restClient, apiKey, apiSecret, passPhrase, algorithm, priceProvider, aggregator, null);
+            return new TestGDAXDataQueueHandler(wssUrl, webSocketClient, restClient, apiKey, apiSecret, algorithm, priceProvider, aggregator, null);
         }
 
         private class TestGDAXDataQueueHandler : GDAXDataQueueHandler
         {
             public TestGDAXDataQueueHandler(string wssUrl, IWebSocket websocket, IRestClient restClient, string apiKey,
                 string apiSecret,
-                string passPhrase,
                 IAlgorithm algorithm,
                 IPriceProvider priceProvider,
                 IDataAggregator aggregator,
                 LiveNodePacket job
                 )
-                : base(wssUrl, websocket, restClient, apiKey, apiSecret, passPhrase, algorithm, priceProvider, aggregator, job)
+                : base(wssUrl, websocket, restClient, apiKey, apiSecret, algorithm, priceProvider, aggregator, job)
             {
             }
 

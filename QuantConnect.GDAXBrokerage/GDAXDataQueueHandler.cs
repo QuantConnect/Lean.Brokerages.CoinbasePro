@@ -40,9 +40,9 @@ namespace QuantConnect.Brokerages.GDAX
         /// <summary>
         /// Initializes a new instance of the <see cref="GDAXDataQueueHandler"/> class
         /// </summary>
-        public GDAXDataQueueHandler(string wssUrl, IWebSocket websocket, IRestClient restClient, string apiKey, string apiSecret, string passPhrase, IAlgorithm algorithm,
+        public GDAXDataQueueHandler(string wssUrl, IWebSocket websocket, IRestClient restClient, string apiKey, string apiSecret, IAlgorithm algorithm,
             IPriceProvider priceProvider, IDataAggregator aggregator, LiveNodePacket job)
-            : base(wssUrl, websocket, restClient, apiKey, apiSecret, passPhrase, algorithm, priceProvider, aggregator, job)
+            : base(wssUrl, websocket, restClient, apiKey, apiSecret, algorithm, priceProvider, aggregator, job)
         {
             Initialize(
                 wssUrl: wssUrl,
@@ -50,7 +50,6 @@ namespace QuantConnect.Brokerages.GDAX
                 restClient: restClient,
                 apiKey: apiKey,
                 apiSecret: apiSecret,
-                passPhrase: passPhrase,
                 algorithm: algorithm,
                 priceProvider: priceProvider,
                 aggregator: aggregator,
@@ -92,7 +91,6 @@ namespace QuantConnect.Brokerages.GDAX
             var restApi = job.BrokerageData["gdax-rest-api"];
             var restClient = new RestClient(restApi);
             var webSocketClient = new WebSocketClientWrapper();
-            var passPhrase = job.BrokerageData["gdax-passphrase"];
             var apiKey = job.BrokerageData["gdax-api-key"];
             var apiSecret = job.BrokerageData["gdax-api-secret"];
             var priceProvider = new ApiPriceProvider(job.UserId, job.UserToken);
@@ -105,7 +103,6 @@ namespace QuantConnect.Brokerages.GDAX
                 restClient: restClient,
                 apiKey: apiKey,
                 apiSecret: apiSecret,
-                passPhrase: passPhrase,
                 algorithm: null,
                 priceProvider: priceProvider,
                 aggregator: aggregator,

@@ -38,10 +38,7 @@ namespace QuantConnect.Brokerages.GDAX
         /// Timestamp Header
         /// </summary>
         public const string TimeHeader = "CB-ACCESS-TIMESTAMP";
-        /// <summary>
-        /// Passphrase header
-        /// </summary>
-        public const string PassHeader = "CB-ACCESS-PASSPHRASE";
+
         private const string Open = "open";
         private const string Pending = "pending";
         private const string Active = "active";
@@ -57,26 +54,12 @@ namespace QuantConnect.Brokerages.GDAX
         {
             var body = request.Parameters.SingleOrDefault(b => b.Type == ParameterType.RequestBody);
 
-            string url;
-            if (request.Method == Method.GET && request.Parameters.Count > 0)
-            {
-                var parameters = request.Parameters.Count > 0
-                    ? string.Join("&", request.Parameters.Select(x => $"{x.Name}={x.Value}"))
-                    : string.Empty;
-                url = $"{request.Resource}?{parameters}";
-            }
-            else
-            {
-                url = request.Resource;
-            }
-
-
+            var url = request.Resource;
             var token = GetAuthenticationToken(body?.Value.ToString() ?? string.Empty, request.Method.ToString().ToUpperInvariant(), url);
 
             request.AddHeader(SignHeader, token.Signature);
             request.AddHeader(KeyHeader, ApiKey);
             request.AddHeader(TimeHeader, token.Timestamp);
-            request.AddHeader(PassHeader, _passPhrase);
 
             return token;
         }
@@ -93,19 +76,19 @@ namespace QuantConnect.Brokerages.GDAX
             var token = new AuthenticationToken
             {
                 Key = ApiKey,
-                Passphrase = _passPhrase,
                 //todo: query time server to correct for time skew
-                Timestamp = Time.DateTimeToUnixTimeStamp(DateTime.UtcNow).ToString(System.Globalization.CultureInfo.InvariantCulture)
+                Timestamp = ((int)Time.DateTimeToUnixTimeStamp(DateTime.UtcNow)).ToString(System.Globalization.CultureInfo.InvariantCulture)
             };
 
-            byte[] data = Convert.FromBase64String(ApiSecret);
-            var prehash = token.Timestamp + method + url + body;
 
+            var prehash = token.Timestamp + method + url + body;
             byte[] bytes = Encoding.UTF8.GetBytes(prehash);
-            using (var hmac = new HMACSHA256(data))
+
+            byte[] secret = Encoding.UTF8.GetBytes(ApiSecret);
+            using (var hmac = new HMACSHA256(secret))
             {
                 byte[] hash = hmac.ComputeHash(bytes);
-                token.Signature = Convert.ToBase64String(hash);
+                token.Signature = Convert.ToHexString(hash).ToLower();
             }
 
             return token;
