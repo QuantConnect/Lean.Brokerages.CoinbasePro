@@ -13,8 +13,10 @@
  * limitations under the License.
 */
 
+using QuantConnect.Util;
 using System;
 using QuantConnect.Configuration;
+using System.Linq;
 using static QuantConnect.Configuration.ApplicationParser;
 
 namespace QuantConnect.CoinbaseBrokerage.ToolBox
@@ -48,7 +50,19 @@ namespace QuantConnect.CoinbaseBrokerage.ToolBox
                 var toDate = optionsObject.ContainsKey("to-date")
                     ? Parse.DateTimeExact(optionsObject["to-date"].ToString(), "yyyyMMdd-HH:mm:ss")
                     : DateTime.UtcNow;
+
+                if (resolution.IsNullOrEmpty() || tickers.Any(s => s.IsNullOrEmpty()))
+                {
+                    Console.WriteLine($"{nameof(CoinbaseDownloader)}:ERROR: '--tickers=' or '--resolution=' parameter is missing");
+                    Console.WriteLine("--tickers=ETHUSD,ETHBTC,BTCUSD,etc.");
+                    Console.WriteLine("--resolution=Second/Minute/Hour/Daily");
+                    Environment.Exit(1);
+                }
+
                 CoinbaseDownloaderProgram.CoinbaseDownloader(tickers, resolution, fromDate, toDate);
+
+                Console.WriteLine("Finish data download. Press any key to continue..");
+                Console.ReadLine();
             }
             else if (targetAppName.Contains("updater") || targetAppName.EndsWith("spu"))
             {

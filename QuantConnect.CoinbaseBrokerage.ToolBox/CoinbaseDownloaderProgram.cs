@@ -33,13 +33,6 @@ namespace QuantConnect.CoinbaseBrokerage.ToolBox
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
 
-            if (resolution.IsNullOrEmpty() || tickers.IsNullOrEmpty())
-            {
-                Console.WriteLine($"{nameof(CoinbaseDownloader)}:ERROR: '--tickers=' or '--resolution=' parameter is missing");
-                Console.WriteLine("--tickers=ETHUSD,ETHBTC,BTCUSD,etc.");
-                Console.WriteLine("--resolution=Second/Minute/Hour/Daily");
-                Environment.Exit(1);
-            }
             var castResolution = (Resolution) Enum.Parse(typeof(Resolution), resolution);
             try
             {
@@ -51,6 +44,7 @@ namespace QuantConnect.CoinbaseBrokerage.ToolBox
                 var downloader = new CoinbaseDownloader();
                 foreach (var ticker in tickers)
                 {
+                    Log.Trace("Start data download for " + ticker);
                     // Download the data
                     var symbolObject = Symbol.Create(ticker, SecurityType.Crypto, market);
                     var data = downloader.Get(new DataDownloaderGetParameters(symbolObject, castResolution, fromDate, toDate));
@@ -62,7 +56,7 @@ namespace QuantConnect.CoinbaseBrokerage.ToolBox
                     writer.Write(distinctData);
                 }
 
-                Log.Trace("Finish data download. Press any key to continue..");
+                Log.Trace("Finish data download");
 
             }
             catch (Exception err)
@@ -71,7 +65,6 @@ namespace QuantConnect.CoinbaseBrokerage.ToolBox
                 Log.Trace(err.Message);
                 Log.Trace(err.StackTrace);
             }
-            Console.ReadLine();
         }
 
         /// <summary>
